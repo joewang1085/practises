@@ -1,0 +1,19 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	defer func() { fmt.Println("1") }()
+	defer func() { fmt.Println(2) }()
+	defer func() { fmt.Println(3) }()
+	defer func() {
+		fmt.Println(7)
+		fmt.Println(recover()) //捕获panic 内容
+		fmt.Println(8)
+	}()
+	fmt.Println(4)
+	panic("panic") // panic 会在defer执行完了之后在上报??
+	fmt.Println(5)
+}
